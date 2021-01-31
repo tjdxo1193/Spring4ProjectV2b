@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%-- http cache control 관련 코드 : jsp--%>
-<%  response.setHeader("Pragma","no-cache");
-    response.setDateHeader("Expires",0);
-    response.setHeader("Cache-Control", "no-cache");  %>
+
+<!-- http cache control 관련 코드 : jsp -->
 
 <!doctype html>
 <html lang="ko">
@@ -11,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <%-- http cache control 관련 코드 : meta --%>
+    <!-- http cache control 관련 코드 : meta -->
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -41,5 +39,6 @@
 <script src="/js/join.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/board.js"></script>
+
 </body>
 </html>

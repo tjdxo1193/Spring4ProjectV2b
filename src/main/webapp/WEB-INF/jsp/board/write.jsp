@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- 로그인 하지 않았으면 list 페이지로 강제 전환--%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%-- 로그인하지 않았으면 list 페이지로 강제 전환 --%>
 <c:if test="${empty UID}">
     <c:redirect url="/board/list?cp=1" />
 </c:if>

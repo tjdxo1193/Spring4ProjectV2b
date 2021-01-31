@@ -1,18 +1,18 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<%-- 줄바꿈 문자를   newChar변수에 저장--%>
-<%--<% String newChar = "블라블라"; %>--%>
-<%--<c: set var="newChar" value="블라블라" />--%>
+<%-- 줄바꿈 문자를 newChar변수에 저장 --%>
+<%--  String newChar = "블라블라"; --%>
+<%-- <c:set var="newChar" value="블라블라" /> --%>
+
 <%-- JSP 객체의 생존기간 : scope --%>
-<%-- page : 현재페이지내에서만 객체 사용 --%>
+<%-- page : 현재 페이지내에서만 객체 사용 --%>
 <%-- request : 이전페이지(폼)에서 생성한 객체를 현재페이지(처리)에 요청을 통해 사용 --%>
-<%-- session : 동일 브라우저내에서 공유할 수 있는 객체 --%>
+<%-- session : 동일 브라우져내에서 공유할 수 있는 객체 --%>
 <%-- application : 어플리케이션(프로젝트) 내에서 공유할 수 있는 객체 --%>
-
 <c:set var="newChar" value="
-" scope="application"/>
+" scope="application" />
 
 <div id="main">
     <div class="margin30">
@@ -33,11 +33,10 @@
         </div>
         <div class="col-6 text-right">
             <c:if test="${not empty UID}">
-                <button type="button" id="newbtn"
-                        class="btn btn-light">
-                    <i class="bi bi-plus-circle-fill bidragup"></i>
-                    새글쓰기</button>
-            </c:if>
+                <button type="button" id="newbd"
+                    class="btn btn-light">
+                <i class="bi bi-plus-circle-fill bidragup"></i>
+                새글쓰기</button></c:if>
         </div>
     </div><!-- 버튼들 -->
 
@@ -72,12 +71,13 @@
                 <button type="button" id="thumbbtn"
                         class="btn btn-success">
                     <i class="bi bi-hand-thumbs-up bidragup"> </i>추천하기
-                    </button>
+                </button>
             </c:if>
-                <button type="button" id="listbdbtn"
-                        class="btn btn-dark">
-                    <i class="bi bi-card-list bidragup"></i>
-                    목록으로</button>
+
+            <button type="button" id="listbdbtn"
+                    class="btn btn-dark">
+                <i class="bi bi-card-list bidragup"></i>
+                목록으로</button>
         </div>
     </div><!-- 버튼들 -->
 

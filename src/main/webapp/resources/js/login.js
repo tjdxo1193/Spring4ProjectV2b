@@ -1,5 +1,5 @@
 // login
-$('#loginbtn').on('click', function (){
+$('#loginbtn').on('click', function() {
     if ($('#userid').val() == '') alert('아이디를 입력하세요!');
     else if ($('#passwd').val() == '') alert('비밀번호를 입력하세요!');
     else {
@@ -10,11 +10,11 @@ $('#loginbtn').on('click', function (){
 });
 
 // join
-$('#join2btn').on('click', function (){
+$('#join2btn').on('click', function() {
     location.href = '/join/agree';
 });
 
 // logout
-$('#logoutbtn').on('click', function (){
+$('#logoutbtn').on('click', function() {
     location.href = '/login/logout';
 });
