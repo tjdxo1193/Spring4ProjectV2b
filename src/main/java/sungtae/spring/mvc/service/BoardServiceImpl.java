@@ -12,7 +12,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Autowired private BoardDAO bdao;
 
-    @Override
+    @Override // 새글쓰기
     public boolean newBoard(BoardVO bvo) {
         boolean isOk = false;
 
@@ -24,31 +24,45 @@ public class BoardServiceImpl implements BoardService{
         return isOk;
     }
 
-    @Override
+    @Override // 리스트보기
     public List<BoardVO> readBoard(String cp) {
         int snum = (Integer.parseInt(cp)-1) * 10;
 
         return bdao.selectBoard(snum);
     }
 
-    @Override
+    @Override // 본문보기
     public BoardVO readOneBoard(String bno) {
         return bdao.selectOneBoard(bno);
     }
 
-    @Override
+    @Override // 수정하기
     public boolean modifyBoard(BoardVO bvo) {
-        return false;
+        boolean isOk = false;
+        int cnt = bdao.updateBoard(bvo);
+        if (cnt > 0) isOk = true;
+        return isOk;
     }
 
     @Override
-    public boolean deleteBoard(String bno) {
-        return false;
+    public boolean removeBoard(String bno) {
+        boolean isOk = false;
+        int cnt = bdao.deleteBoard(bno);
+        if (cnt > 0) isOk = true;
+        return isOk;
     }
 
     // 게시글 총 개수
     public int countBoard(){
 
         return bdao.selectCountBoard();
+    }
+
+    @Override // 조회수 증가
+    public boolean viewCountBoard(String bno) {
+        boolean isOk = false;
+        int cnt = bdao.updateViewCount(bno);
+        if (cnt > 0) isOk = true;
+        return isOk;
     }
 }

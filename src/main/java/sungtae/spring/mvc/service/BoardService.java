@@ -9,6 +9,7 @@ public interface BoardService {
     List<BoardVO> readBoard(String cp);
     BoardVO readOneBoard(String bno);
     boolean modifyBoard(BoardVO bvo);
-    boolean deleteBoard(String bno);
+    boolean removeBoard(String bno);
     int countBoard();
+    boolean viewCountBoard(String bno);
 }

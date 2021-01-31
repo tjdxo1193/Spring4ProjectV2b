@@ -34,9 +34,11 @@
 
     <div class="row margin1050">
         <div class="col-12 text-right">
-            <button type="button" id="newbd"
-                    class="btn btn-info">
-                <i class="bi bi-plus-circle bidragup"></i> 새글쓰기</button>
+            <c:if test="${not empty UID}">
+                <button type="button" id="newbd"
+                        class="btn btn-info">
+                    <i class="bi bi-plus-circle bidragup"></i> 새글쓰기</button>
+            </c:if>
         </div>
     </div>
 
@@ -62,7 +64,7 @@
                     <th>128</th></tr>
                 <c:forEach var="b" items="${bds}">
                 <tr><td>${b.bno}</td>
-                    <td><a href="/board/view?bno=${b.bno}">${b.title}</a></td>
+                    <td><a href="/board/view?bno=${b.bno}&cp=${cp}">${b.title}</a></td>
                     <td>${b.userid}</td>
                     <td>${fn:substring(b.regdate,0,10)}</td>
                     <td>${b.thumbs}</td>

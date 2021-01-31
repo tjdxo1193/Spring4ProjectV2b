@@ -11,4 +11,5 @@ public interface BoardDAO {
     int updateBoard(BoardVO bvo);
     int deleteBoard(String bno);
     int selectCountBoard();
+    int updateViewCount(String bno);
 }

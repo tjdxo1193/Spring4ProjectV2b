@@ -40,4 +40,9 @@ public class BoardDAOImpl implements BoardDAO {
     public int selectCountBoard() {
         return sqlSession.selectOne("board.countBoard");
     }
+
+    @Override
+    public int updateViewCount(String bno) {
+        return sqlSession.update("board.viewCount", bno);
+    }
 }
