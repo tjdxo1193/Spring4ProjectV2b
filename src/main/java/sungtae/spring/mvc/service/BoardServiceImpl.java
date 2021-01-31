@@ -8,11 +8,11 @@ import sungtae.spring.mvc.vo.BoardVO;
 import java.util.List;
 
 @Service("bsrv")
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
     @Autowired private BoardDAO bdao;
 
-    @Override // 새글쓰기
+    @Override   // 새글쓰기
     public boolean newBoard(BoardVO bvo) {
         boolean isOk = false;
 
@@ -24,19 +24,19 @@ public class BoardServiceImpl implements BoardService{
         return isOk;
     }
 
-    @Override // 리스트보기
+    @Override   // 리스트보기
     public List<BoardVO> readBoard(String cp) {
-        int snum = (Integer.parseInt(cp)-1) * 10;
+        int snum = (Integer.parseInt(cp) - 1) * 10;
 
         return bdao.selectBoard(snum);
     }
 
-    @Override // 본문보기
+    @Override   // 본문보기
     public BoardVO readOneBoard(String bno) {
         return bdao.selectOneBoard(bno);
     }
 
-    @Override // 수정하기
+    @Override   // 수정하기
     public boolean modifyBoard(BoardVO bvo) {
         boolean isOk = false;
         int cnt = bdao.updateBoard(bvo);
@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService{
         return isOk;
     }
 
-    @Override
+    @Override   // 삭제하기
     public boolean removeBoard(String bno) {
         boolean isOk = false;
         int cnt = bdao.deleteBoard(bno);
@@ -52,13 +52,12 @@ public class BoardServiceImpl implements BoardService{
         return isOk;
     }
 
-    // 게시글 총 개수
-    public int countBoard(){
-
+    // 게시글 총 갯수
+    public int countBoard() {
         return bdao.selectCountBoard();
     }
 
-    @Override // 조회수 증가
+    @Override  // 조회수 증가
     public boolean viewCountBoard(String bno) {
         boolean isOk = false;
         int cnt = bdao.updateViewCount(bno);

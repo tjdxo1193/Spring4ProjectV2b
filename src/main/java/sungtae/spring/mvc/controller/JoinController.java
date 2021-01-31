@@ -18,10 +18,8 @@ import java.net.URLEncoder;
 @Controller
 public class JoinController {
 
-    // @Autowired
-    // private MemberService msrv;
-    // @Autowired
-    // private GoogleCaptchaUtil gcutil;
+    //@Autowired private MemberService msrv;
+    //@Autowired private GoogleCaptchaUtil gcutil;
 
     private MemberService msrv;
     private GoogleCaptchaUtil gcutil;
@@ -47,9 +45,10 @@ public class JoinController {
         return "join/joinme.tiles";
     }
 
-    // 회원가입시 입력한 정보는 MemberVO 객체에 저장됨
-    // 하지만, 클라이언트에서는 회원정보와 상관없는 데이터를 보낸 경우
-    // HttpServletRequest 객체를 이용해서 처리함
+
+    // 회원가입시 입력한 정보는 MemberVO객체 저장됨
+    // 하지만, 클라이언트에서 회원정보와 상관없는 데이터를 보낸 경우
+    // HttpServletRequest 객체를 이용해서 처리함 (추천!)
     // 물론, MemberVO 객체에 같이 정의해서 사용해도 됨
 
     // Model/ModelAttribute/ModelAndView
@@ -62,11 +61,10 @@ public class JoinController {
     @PostMapping("/join/joinme")  // 회원가입 처리
     public String joinmeok(MemberVO mvo,
                            HttpServletRequest req,
-                           RedirectAttributes rds)
-            throws UnsupportedEncodingException {
-        // 질의 문자열에 한글을 포함시키려면
-        // 반드시 URLEncoder 를 이용해서 한글에 대한 적절한 인코딩이 필요!
-        //
+                           RedirectAttributes rds) throws UnsupportedEncodingException {
+
+        // 질의문자열에 한글을 포함시키려면
+        // 반드시 URLEncoder를 이용해서 한글에 대한 적절한 인코딩이 필요!
         String param = "?name=" + URLEncoder.encode(mvo.getName(), "UTF-8");
         param += "&jumin1=" + mvo.getJumin().split("-")[0];
         param += "&jumin2=" + mvo.getJumin().split("-")[1];
@@ -75,14 +73,16 @@ public class JoinController {
         // 클라이언트에서 생성한 captcha 코드를 가져옴
         String gCaptcha = req.getParameter("g-recaptcha");
 
-        // captcha 코드의 유효성을 확인함
-        // 결과 : true => 테이블에 회원정보 저장, /join/joinok 이동
+        // captcha코드의 유효성을 확인함
+        // 결과 : true  => 테이블에 회원정보 저장, /join/joinok 이동
         // 결과 : false => /join/joinme 이동
-        if (gcutil.checkCaptcha(gCaptcha)){
+        if ( gcutil.checkCaptcha(gCaptcha) ) {
             msrv.newMember(mvo);
             returnPage = "redirect:/join/joinok";
         } else {
-            rds.addFlashAttribute("ckeckCaptcha", "자동가입방지 확인이 실패했어요!!");
+            rds.addFlashAttribute("checkCaptcha",
+                    "자동가입방지 확인이 실패했어요!!");
+            rds.addFlashAttribute("mvo", mvo);
         }
 
         return returnPage;
@@ -127,5 +127,5 @@ public class JoinController {
             ex.printStackTrace();
         }
     }
-    
+
 }

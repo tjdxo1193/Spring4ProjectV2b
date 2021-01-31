@@ -37,6 +37,7 @@ public class BoardDAOImpl implements BoardDAO {
         return sqlSession.delete("board.deleteBoard", bno);
     }
 
+    @Override
     public int selectCountBoard() {
         return sqlSession.selectOne("board.countBoard");
     }
