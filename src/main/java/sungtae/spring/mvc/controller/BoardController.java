@@ -10,6 +10,7 @@ import sungtae.spring.mvc.service.BoardService;
 import sungtae.spring.mvc.util.GoogleCaptchaUtil;
 import sungtae.spring.mvc.vo.BoardVO;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -52,8 +53,13 @@ public class BoardController {
     }
 
     @GetMapping("/board/write") // 새글쓰기 폼
-    public String write(){
-        return "board/write.tiles";
+    public String write(HttpSession sess){
+        String returnPage = "redirect:/board/index";
+
+        // 로그인 했으면 새글쓰기 폼 출력
+        if (sess.getAttribute("UID") != null)
+            returnPage = "board/write.tiles";
+            return returnPage;
     }
 
     @PostMapping("/board/write")  // 새글쓰기 처리
@@ -66,10 +72,14 @@ public class BoardController {
         return returnPage;
     }
     @GetMapping("/board/update") // 수정하기 폼
-    public ModelAndView update(String bno, String cp, ModelAndView mv){
-
-        mv.setViewName("board/update,tiles");
-        mv.addObject("bd", bsrv.readOneBoard(bno));
+    public ModelAndView update(String bno, ModelAndView mv, HttpSession sess){
+        // 로그인 했으면 수정하기 폼 출력
+        if (sess.getAttribute("UID") != null && bno != null) {
+            mv.setViewName("board/update,tiles");
+            mv.addObject("bd", bsrv.readOneBoard(bno));
+        } else {
+            mv.setViewName("redirect:/index");
+        }
         return mv;
     }
 
