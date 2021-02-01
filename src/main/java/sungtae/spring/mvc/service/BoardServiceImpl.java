@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import sungtae.spring.mvc.dao.BoardDAO;
 import sungtae.spring.mvc.vo.BoardVO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("bsrv")
 public class BoardServiceImpl implements BoardService {
@@ -29,6 +31,18 @@ public class BoardServiceImpl implements BoardService {
         int snum = (Integer.parseInt(cp) - 1) * 10;
 
         return bdao.selectBoard(snum);
+    }
+
+    @Override
+    public List<BoardVO> readBoard(String cp, String findtype, String findkey) {
+        Map<String, Object> param = new HashMap<>();
+
+        int snum = (Integer.parseInt(cp) - 1) * 10;
+        param.put("snum", snum);
+        param.put("findType", findtype);
+        param.put("findKey", findkey);
+
+        return bdao.findSelectList(param);
     }
 
     @Override   // 본문보기
@@ -55,6 +69,15 @@ public class BoardServiceImpl implements BoardService {
     // 게시글 총 갯수
     public int countBoard() {
         return bdao.selectCountBoard();
+    }
+
+    @Override
+    public int countBoard(String findtype, String findkey) {
+        Map<String, String> param = new HashMap<>();
+
+        param.put("findType", findtype);
+        param.put("findKey", findkey);
+        return bdao.selectCountBoard(param);
     }
 
     @Override  // 조회수 증가

@@ -65,5 +65,8 @@
     <Logger name="org.springframework.jdbc.core.StatementCreatorUtils"
             level="trace" />
 
+    <logger name="sungtae.spring.mvc.*" additivity="false" >
+        <AppenderRef ref="console" level="info" />
+    </logger>
     </Loggers>
 </Configuration>

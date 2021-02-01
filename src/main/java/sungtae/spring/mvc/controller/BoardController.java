@@ -23,7 +23,7 @@ public class BoardController {
                            GoogleCaptchaUtil gcutil) {
         this.bsrv = bsrv;
         this.gcutil = gcutil;
-        //this.brsrv = brsrv;
+        this.brsrv = brsrv;
     }
 
     // 게시판 목록 처리 1 : 페이징
@@ -60,6 +60,7 @@ public class BoardController {
         mv.setViewName("board/view.tiles");
 
         mv.addObject("bd", bsrv.readOneBoard(bno));
+        mv.addObject("rp", brsrv.readReply(bno));
         bsrv.viewCountBoard(bno);    // 조회수 증가
 
         return mv;
@@ -131,6 +132,15 @@ public class BoardController {
             bsrv.removeBoard(bno);
 
         return "redirect:/board/list?cp=" + cp;
+    }
+
+    @GetMapping("/board/find") // 검색기능
+    // 게시물 검색기능을 위한 url 호출 방법 : /board/find?findtype=title&findkey=기생충&cp=1
+    public ModelAndView find(ModelAndView mv, String cp, String findtype, String findkey){
+        mv.setViewName("board/list.tiles");
+        mv.addObject("bds", bsrv.readBoard(cp, findtype, findkey));
+        mv.addObject("bdcnt", bsrv.countBoard(findtype, findkey));
+        return mv;
     }
 
 }

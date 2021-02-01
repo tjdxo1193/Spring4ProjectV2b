@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import sungtae.spring.mvc.vo.BoardVO;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository("bdao")
 public class BoardDAOImpl implements BoardDAO {
@@ -45,5 +46,15 @@ public class BoardDAOImpl implements BoardDAO {
     @Override
     public int updateViewCount(String bno) {
         return sqlSession.update("board.viewCount", bno);
+    }
+
+    @Override
+    public int selectCountBoard(Map<String, String> param) {
+        return sqlSession.selectOne("board.findCountBoard", param);
+    }
+
+    @Override
+    public List<BoardVO> findSelectList(Map<String, Object> param) {
+        return sqlSession.selectList("board.findSelectList", param);
     }
 }
