@@ -12,4 +12,9 @@
         select * from Reply where bno = #{bno}
         order by cno;
     </select>
+
+    <select id="lastRno" resultType="String" statementType="PREPARED">
+        select auto_increment from information_schema.TABLES
+        where TABLE_NAME = 'Reply';
+    </select>
 </mapper>

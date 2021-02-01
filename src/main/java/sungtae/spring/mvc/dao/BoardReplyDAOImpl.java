@@ -13,7 +13,16 @@ public class BoardReplyDAOImpl implements BoardReplyDAO{
     @Autowired private SqlSession sqlSession;
 
     @Override
-    public List<ReplyVO> selectReply(String bno) {
+    public List<ReplyVO> selectReply(int bno) {
         return sqlSession.selectList("reply.selectList", bno);
+    }
+
+    @Override
+    public int insertReply(ReplyVO rvo) {
+        rvo.setCno( selectLastRno() );
+        return sqlSession.insert("reply.insertReply", rvo);
+    }
+    public String selectLastRno(){
+        return sqlSession.selectOne("reply.lastRno");
     }
 }

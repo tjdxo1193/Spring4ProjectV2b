@@ -75,3 +75,7 @@ insert into Reply (rno,cno,bno,reply,userid) values (7, 7, 11, '블라블라', '
 -- select
 select bno, rno, cno, reply, userid from Reply where bno = 10
 order by cno, rno;
+
+-- 데이터 추가시의 반영될 auto_increment 값 조회
+select auto_increment from information_schema.TABLES
+where TABLE_NAME = 'Reply';

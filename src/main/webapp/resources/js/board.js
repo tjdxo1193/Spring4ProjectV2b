@@ -39,6 +39,17 @@ $('#rmbdbtn').on('click', function(){
 });
 
 
+$('#bdcmtbtn').on('click', function (){
+    if ($('#reply').val() == '') alert('댓글을 작성하세요!!');
+    else {
+
+        $('#replyfrm').attr('method', 'post');
+        $('#replyfrm').attr('action', '/board/replyok');
+        $('#uid').val('리플작성');
+        $('#replyfrm').submit();
+    }
+});
+
 // write
 $('#newbdbtn').on('click', function() {
     if ($('#title').val() == '') alert('제목 작성하세요!');

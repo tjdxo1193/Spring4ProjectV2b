@@ -9,6 +9,8 @@ import sungtae.spring.mvc.service.BoardReplyService;
 import sungtae.spring.mvc.service.BoardService;
 import sungtae.spring.mvc.util.GoogleCaptchaUtil;
 import sungtae.spring.mvc.vo.BoardVO;
+import sungtae.spring.mvc.vo.ReplyVO;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -20,7 +22,7 @@ public class BoardController {
 
     @Autowired
     public BoardController(BoardService bsrv,
-                           GoogleCaptchaUtil gcutil) {
+                           GoogleCaptchaUtil gcutil, BoardReplyService brsrv) {
         this.bsrv = bsrv;
         this.gcutil = gcutil;
         this.brsrv = brsrv;
@@ -141,6 +143,15 @@ public class BoardController {
         mv.addObject("bds", bsrv.readBoard(cp, findtype, findkey));
         mv.addObject("bdcnt", bsrv.countBoard(findtype, findkey));
         return mv;
+    }
+
+    @PostMapping("board/replyok")
+    public String replyok(ReplyVO rvo) {
+        String returnPage = "redirect:/board/view?bno=" + rvo.getBno();
+
+        brsrv.newReply(rvo);
+
+        return returnPage;
     }
 
 }

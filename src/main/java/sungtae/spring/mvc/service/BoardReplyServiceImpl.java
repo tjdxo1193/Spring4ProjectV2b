@@ -11,8 +11,14 @@ public class BoardReplyServiceImpl implements BoardReplyService{
 
     @Autowired private BoardReplyDAO brdao;
 
-    @Override
+    @Override // 댓글/ 대댓글 가져오기
     public List<ReplyVO> readReply(String bno) {
-        return brdao.selectReply(bno);
+        return brdao.selectReply(Integer.parseInt(bno));
+    }
+
+    @Override // 댓글 쓰기
+    public boolean newReply(ReplyVO rvo) {
+        int cnt = brdao.insertReply(rvo);
+        return true;
     }
 }

@@ -90,63 +90,27 @@
             나도 한마디</h3>
 
         <table class="table tblines tbwide">
-            <tr><td><h4>zzyzzy</h4></td>
-                <td>
-                    <div class="cmtbg1">2021-01-30 15:15:15</div>
-                    <p>Nulla dui mauris, tempus at ornare eget, dapibus id diam. <br>
-                        Etiam ac placerat risus, a aliquet nunc. <br>
-                        Quisque id tortor ut ante auctor auctor. <br>
-                        Maecenas sollicitudin risus mauris, a auctor leo lobortis ac. <br>
-                        Sed luctus consequat ligula, vitae ultrices purus lobortis gravida.
-                    </p><!-- 댓글 -->
-                    <ul class="list-unstyled">
-                        <li>
-                            <div class="cmtbg2"><span class="h4">zzyzzy</span>
-                                <span class="pushright">2021-01-30 16:16:16</span></div>
-                            <p>Praesent metus ante, finibus vitae nibh in, consectetur dignissim eros.</p>
-                        </li>
-                    </ul><!-- 댓글의 댓글 -->
-                </td></tr>
-            <tr><td><h4>zzyzzy</h4></td>
-                <td>
-                    <div class="cmtbg1">2021-01-30 15:15:15</div>
-                    <p>Nulla dui mauris, tempus at ornare eget, dapibus id diam. <br>
-                        Etiam ac placerat risus, a aliquet nunc. <br>
-                        Quisque id tortor ut ante auctor auctor. <br>
-                        Maecenas sollicitudin risus mauris, a auctor leo lobortis ac. <br>
-                        Sed luctus consequat ligula, vitae ultrices purus lobortis gravida.
-                    </p><!-- 댓글 -->
-                </td></tr>
-            <tr><td><h4>zzyzzy</h4></td>
-                <td>
-                    <div class="cmtbg1">2021-01-30 15:15:15</div>
-                    <p>Nulla dui mauris, tempus at ornare eget, dapibus id diam. <br>
-                        Etiam ac placerat risus, a aliquet nunc. <br>
-                        Quisque id tortor ut ante auctor auctor. <br>
-                        Maecenas sollicitudin risus mauris, a auctor leo lobortis ac. <br>
-                        Sed luctus consequat ligula, vitae ultrices purus lobortis gravida.
-                    </p><!-- 댓글 -->
-                </td></tr>
-            <tr><td><h4>zzyzzy</h4></td>
-                <td>
-                    <div class="cmtbg1">2021-01-30 15:15:15</div>
-                    <p>Nulla dui mauris, tempus at ornare eget, dapibus id diam. <br>
-                        Etiam ac placerat risus, a aliquet nunc. <br>
-                        Quisque id tortor ut ante auctor auctor. <br>
-                        Maecenas sollicitudin risus mauris, a auctor leo lobortis ac. <br>
-                        Sed luctus consequat ligula, vitae ultrices purus lobortis gravida.
-                    </p><!-- 댓글 -->
-                </td></tr>
-            <tr><td><h4>fdsfsdfsdfsdfs</h4></td>
-                <td>
-                    <div class="cmtbg1">2021-01-30 15:15:15</div>
-                    <p>Nulla dui mauris, tempus at ornare eget, dapibus id diam. <br>
-                        Etiam ac placerat risus, a aliquet nunc. <br>
-                        Quisque id tortor ut ante auctor auctor. <br>
-                        Maecenas sollicitudin risus mauris, a auctor leo lobortis ac. <br>
-                        Sed luctus consequat ligula, vitae ultrices purus lobortis gravida.
-                    </p><!-- 댓글 -->
-                </td></tr>
+            <c:forEach var="r" items="${rp}">
+                <c:if test="${r.rno eq r.cno}">
+                    <tr><td><h4>${r.userid}</h4></td>
+                        <td>
+                            <div class="cmtbg1">${r.regdate}</div>
+                            <p>${r.reply}</p><!-- 댓글 -->
+                        </td>
+                    </tr>
+                </c:if>
+                <c:if test="${r.rno ne r.cno}">
+                    <tr><td></td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <div class="cmtbg2"><span class="h4">${r.userid}</span>
+                                        <span class="pushright">${r.regdate}</span></div>
+                                    <p>${r.reply}</p></li></ul><!-- 댓글의 댓글 -->
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
         </table>
     </div><!-- 댓글목록 -->
 
@@ -154,11 +118,13 @@
         <form id="replyfrm" class="card card-body bg-light">
             <div class="form-group row justify-content-center">
                 <label class="pushtop50 text-primary font-weight-bold">로그인하세요</label>&nbsp;
-                <textarea id="comment" rows="5" class="form-control col-7"></textarea>&nbsp;
-                <span><button id="bdcmtbtn" class="btn btn-dark pushtop50">
+                <textarea id="reply" name="reply" rows="5" class="form-control col-7"></textarea>&nbsp;
+                <span><button type="button" id="bdcmtbtn" class="btn btn-dark pushtop50">
                         <i class="bi bi-chat-text-fill bidragup"></i>
                         댓글쓰기</button></span>
             </div>
+            <input type="hidden" name="bno" value="${param.bno}">
+            <input type="hidden" id="uid" name="userid" value="${UID}">
         </form>
     </div><!-- 댓글폼 -->
 </div>
