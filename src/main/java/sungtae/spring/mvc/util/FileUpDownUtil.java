@@ -6,6 +6,7 @@ import org.apache.commons.fileupload.RequestContext;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,14 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Component("fud")
 public class FileUpDownUtil {
+
+    // 자바 웹 프로그래밍의 파일업로드 지원
+    // 1. oreilly사의 '자바서블릿프로그래밍' 도서의 예제 - cos.jar
+    // 2. apache commons project - FileUpload (추천!)
+    // commons.apache.org
+    // 3. Servlet 3.x 부터 파일업로드 내장 - MultipartFile
 
     private String uploadPath = "c:/Java/pdsupload/";
     // 파일 업로드시 저장된 경로 지정

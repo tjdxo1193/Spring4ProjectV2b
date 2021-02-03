@@ -8,6 +8,13 @@
         insert into Reply (cno, bno, userid, reply)
         values (#{cno}, #{bno}, #{userid}, #{reply});
     </insert>
+
+    <insert id="insertReply2" statementType="PREPARED" parameterType="sungtae.spring.mvc.vo.ReplyVO">
+        insert into Reply (cno, bno, userid, reply)
+        values ((select auto_increment from information_schema.TABLES
+            where TABLE_NAME = 'Reply'), #{bno}, #{userid}, #{reply});
+    </insert>
+
     <select id="selectList" statementType="PREPARED" parameterType="int" resultType="sungtae.spring.mvc.vo.ReplyVO">
         select * from Reply where bno = #{bno}
         order by cno;

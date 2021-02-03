@@ -21,4 +21,10 @@ public class BoardReplyServiceImpl implements BoardReplyService{
         int cnt = brdao.insertReply(rvo);
         return true;
     }
+
+    @Override
+    public boolean newReReply(ReplyVO rvo) {
+        int cnt = brdao.insertReReply(rvo);
+        return true;
+    }
 }

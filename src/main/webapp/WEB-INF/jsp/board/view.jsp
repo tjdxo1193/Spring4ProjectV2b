@@ -95,6 +95,15 @@
                     <tr><td><h4>${r.userid}</h4></td>
                         <td>
                             <div class="cmtbg1">${r.regdate}</div>
+                            <span style="float:right">
+                                <c:if test="${not empty UID}">
+                                    <a href="javascript:addReply('${r.rno}')">[추가]</a>
+                                </c:if>
+                                <c:if test="${UID eq r.userid}">
+                                    <a href="">[수정]</a>
+                                    <a href="">[삭제]</a>
+                                </c:if>
+                            </span>
                             <p>${r.reply}</p><!-- 댓글 -->
                         </td>
                     </tr>
@@ -113,18 +122,36 @@
             </c:forEach>
         </table>
     </div><!-- 댓글목록 -->
+    <c:if test="${not empty UID}">
+        <div class="row margin1050">
+            <form id="replyfrm" class="card card-body bg-light">
+                <div class="form-group row justify-content-center">
+                    <label class="pushtop50 text-primary font-weight-bold">${UID}</label>&nbsp;
+                    <textarea id="reply" name="reply" rows="5" class="form-control col-7"></textarea>&nbsp;
+                    <span><button type="button" id="bdcmtbtn" class="btn btn-dark pushtop50">
+                            <i class="bi bi-chat-text-fill bidragup"></i>
+                            댓글쓰기</button></span>
+                </div>
+                <input type="hidden" name="bno" value="${param.bno}">
+                <input type="hidden" id="uid" name="userid" value="${UID}">
+            </form>
+        </div><!-- 댓글폼 -->
+    </c:if>
+</div>
 
-    <div class="row margin1050">
-        <form id="replyfrm" class="card card-body bg-light">
-            <div class="form-group row justify-content-center">
-                <label class="pushtop50 text-primary font-weight-bold">로그인하세요</label>&nbsp;
-                <textarea id="reply" name="reply" rows="5" class="form-control col-7"></textarea>&nbsp;
-                <span><button type="button" id="bdcmtbtn" class="btn btn-dark pushtop50">
-                        <i class="bi bi-chat-text-fill bidragup"></i>
-                        댓글쓰기</button></span>
+<%-- 대댓글 작성을 위한 모달 대화상자 --%>
+<div class="modal hide" id="replyModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h3 class="modal-title">대댓글 쓰기</h3></div>
+            <div class="modal-body">
+                <form name="rpfrm" id="rpfrm" class="well form-inline"><textarea name="reply" id="rereply" cols="75" rows="8" class="span4"></textarea>
+                    <input type="hidden" name="userid" value="${UID}">
+                    <input type="hidden" name="bno" value="${param.bno}">
+                    <input type="hidden" name="cno" id="cno">
+                </form>
             </div>
-            <input type="hidden" name="bno" value="${param.bno}">
-            <input type="hidden" id="uid" name="userid" value="${UID}">
-        </form>
-    </div><!-- 댓글폼 -->
+            <div class="modal-footer"><button type="button" id="rpbtn" class="btn btn-warning">대댓글 작성</button></div>
+        </div>
+    </div>
 </div>

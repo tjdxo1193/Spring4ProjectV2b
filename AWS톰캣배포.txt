@@ -1,0 +1,20 @@
+AWS에 생성해둔 centos 서버에
+스프링MVC 프로젝트 배포하고 확인하기
+
+1. 스프링MVC 프로젝트를 WAR로 패키징하기
+(확인 사항) ctrl + alt + shift + s
+=> 아티팩트 => 프로젝트명:war
+Build => builds Artifacts => 프로젝트명:war
+=> action은 Build 선택
+
+2. AWS 톰캣 서버의 webapp에 업로드하기
+1번 과정에서 생성된 결과물인 war파일을 winscp로 업로드함
+=> 톰캣서버가 자동으로 war파일을 배포함
+=> 프로젝트명 이름으로 폴더가 생겼는지 확인
+
+3. 브라우저로 확인
+http://aws서버주소:8080/프로젝트명
+
+
+
+ROOT에 맞추고 Spring4Project 파일 안에 있는것들을 다 옮긴다
