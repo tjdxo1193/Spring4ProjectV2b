@@ -20,6 +20,15 @@ public class PdsVO {
     private String fname3;
     private String fsize3;
     private String ftype3;
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getPno() {
         return pno;

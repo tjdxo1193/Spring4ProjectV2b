@@ -1,6 +1,4 @@
 package sungtae.spring.mvc.service;
-
-import sungtae.spring.mvc.vo.BoardVO;
 import sungtae.spring.mvc.vo.PdsVO;
 
 import java.util.List;
@@ -11,6 +9,8 @@ public interface PdsService {
 
     List<PdsVO> readPds(String cp);
     int countPds();
-    PdsVO readOnePds(String bno);
-    boolean viewCountPds(String bno);
+    PdsVO readOnePds(String pno);
+    boolean viewCountPds(String pno);
+
+    PdsVO readOneFname(String pno, String order);
 }

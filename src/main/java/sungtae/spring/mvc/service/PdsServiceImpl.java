@@ -3,7 +3,6 @@ package sungtae.spring.mvc.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sungtae.spring.mvc.dao.PdsDAO;
-import sungtae.spring.mvc.vo.BoardVO;
 import sungtae.spring.mvc.vo.PdsVO;
 
 import java.util.List;
@@ -36,13 +35,21 @@ public class PdsServiceImpl implements PdsService{
     }
 
     @Override
-    public PdsVO readOnePds(String bno) {
-        return null;
+    public PdsVO readOnePds(String pno) {
+        return pdao.selectOnePds(pno);
     }
 
     @Override
-    public boolean viewCountPds(String bno) {
-        return false;
+    public boolean viewCountPds(String pno) {
+        boolean isOk = false;
+        int cnt = pdao.updateViewCount(pno);
+        if (cnt > 0) isOk = true;
+        return isOk;
+    }
+
+    @Override
+    public PdsVO readOneFname(String pno, String order) {
+        return pdao.selectOneFname(pno, order);
     }
 
     // 폼데이터를 PdsVO에 나눠 담음
@@ -56,6 +63,7 @@ public class PdsServiceImpl implements PdsService{
         for (String key: frmdata.keySet()){ // Map 으로부터 키를 하나씩 꺼냄
             String val = frmdata.get(key); // 키에 해당하는 값을 알아냄
             switch (key){
+                case "uuid": p.setUuid(val); break;
                 case "title": p.setTitle(val); break;
                 case "userid": p.setUserid(val); break;
                 case "contents": p.setContents(val); break;

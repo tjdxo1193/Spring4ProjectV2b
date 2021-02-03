@@ -7,10 +7,10 @@
     <insert id="insertPds" statementType="PREPARED" parameterType="sungtae.spring.mvc.vo.PdsVO">
         insert into Pds
         (title, userid, contents, fname1, fname2, fname3,
-        fsize1, fsize2, fsize3, ftype1, ftype2, ftype3)
+        fsize1, fsize2, fsize3, ftype1, ftype2, ftype3, uuid)
         values (#{title},#{userid},#{contents},#{fname1},
                 #{fname2},#{fname3},#{fsize1},#{fsize2},
-                #{fsize3},#{ftype1},#{ftype2},#{ftype3});
+                #{fsize3},#{ftype1},#{ftype2},#{ftype3}, #{uuid});
     </insert>
 
     <select id="selectList" statementType="PREPARED" parameterType="int" resultType="sungtae.spring.mvc.vo.PdsVO">
@@ -21,5 +21,23 @@
     <select id="countPds" statementType="PREPARED" resultType="int">
         select count(pno) cnt from Pds
     </select>
+
+    <select parameterType="String" statementType="PREPARED" id="selectOne"
+            resultType="sungtae.spring.mvc.vo.PdsVO">
+        select * from Pds
+        where pno = #{pno};
+    </select>
+
+    <update parameterType="String" statementType="PREPARED" id="viewCount">
+        update Pds
+        set views = views + 1
+        where pno = #{pno}
+    </update>
+
+    <select id="selectOneFname" statementType="PREPARED" parameterType="Map" resultType="sungtae.spring.mvc.vo.PdsVO">
+        select ${order} fname1, uuid from Pds
+        where pno=#{pno}
+    </select>
+
 
 </mapper>

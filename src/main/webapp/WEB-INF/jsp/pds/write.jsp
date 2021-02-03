@@ -53,7 +53,7 @@
                     <label class="custom-file-label">첨부할 파일을 선택하세요</label>
                 </div>
             </div>
-            <%— 파일첨부 끝 —%>
+            <!—- 파일첨부 끝 —->
 
             <div class="form-group row">
                 <label class="col-2 col-form-label text-right">자동입력방지</label>
